@@ -27,8 +27,8 @@ def video2audio(filename, path):
 def audio_to_text(path, file_name):
     print("Converting audio to text..")
 
-    client=boto3.client("transcribe", region_name="us-east-2",aws_access_key_id="AKIATRNPRVC7C3GZ72PS", 
-                    aws_secret_access_key="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")
+    client=boto3.client("transcribe", region_name="us-east-2",aws_access_key_id="KEY", 
+                    aws_secret_access_key="KEY")
 
     filename = "audio3.wav"
     media_uri = 's3://speechtotextbkt/' + filename
@@ -58,8 +58,8 @@ def audio_to_text(path, file_name):
             uri = status_response["TranscriptionJob"]["Transcript"]["TranscriptFileUri"]
             trans = requests.get(uri)
             
-            s3 = boto3.client('s3',region_name="us-east-2",aws_access_key_id="AKIATRNPRVC7C3GZ72PS", 
-                    aws_secret_access_key="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")
+            s3 = boto3.client('s3',region_name="us-east-2",aws_access_key_id="KEY", 
+                    aws_secret_access_key="KEY")
             s3.download_file('speechtotextbkt', 'transcrib_job_one.json', 'result.json')
             with open("result.json", "rb") as f:
                 content = json.load(f)
